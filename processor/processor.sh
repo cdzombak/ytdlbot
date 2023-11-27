@@ -4,7 +4,10 @@ set -eu
 cd /ytdlbot-media
 Q_FILE=_queue.txt
 
+OLD_IFS="$IFS"
+IFS=$'\n\t'
 read -r COLLECTION URL <"$Q_FILE" || URL=""
+IFS="$OLD_IFS"
 if [ -z "$URL" ]; then
   echo "$(date +%F_%T): $Q_FILE is empty; nothing to do"
   exit 0
