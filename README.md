@@ -83,7 +83,7 @@ The API container exposes the API on port `5000`. Map this to your desired port 
 
 ### Docker Compose and Makefile
 
-I recommend managing your deployment via Docker Compose. A sample `docker-compose.yml` is provided in this repo (TODO(cdzombak): link). Notably, it demonstrates:
+I recommend managing your deployment via Docker Compose. [A sample `docker-compose.yml` is provided in this repo](https://github.com/cdzombak/ytdlbot/blob/main/deploy-sample/docker-compose.yml). Notably, it demonstrates:
 
 - Correct directory mappings
 - Correct UID and GID setup
@@ -102,7 +102,7 @@ A sample `Makefile` is also provided, which:
 
 The queue processor runs its tasks using [`runner`](https://github.com/cdzombak/runner). You can enable notifications for failed operations via email, Discord, or Ntfy by setting the appropriate `RUNNER_` environment variables on the processor container.
 
-[See the `runner` README for details](https://github.com/cdzombak/runner#options), and see the sample `docker-compose.yml` in this repo for an example using SMTP to send failure notifications. (TODO(cdzombak): link)
+[See the `runner` README for details](https://github.com/cdzombak/runner#options), and see [the sample `docker-compose.yml` in this repo](https://github.com/cdzombak/ytdlbot/blob/main/deploy-sample/docker-compose.yml) for an example using SMTP to send failure notifications.
 
 ### Tailscale
 
@@ -112,11 +112,11 @@ I use and recommend Tailscale to control access to the ytdlbot API. This is simp
 sudo tailscale serve --bg --https=8124 http://127.0.0.1:5000
 ```
 
-The sample `Makefile` in this repo (TODO(cdzombak): link) has an example of this.
+[The sample `Makefile` in this repo](https://github.com/cdzombak/ytdlbot/blob/main/deploy-sample/Makefile) has an example of this.
 
 ### Netdata
 
-I use Netdata to collect metrics and monitor my server. The `netdata` directory in this repo (TODO(cdzombak): link) contains a definition for several charts tracking metrics about your ytdlbot media library, and an alarm you can enable to be notified when a download failure occurs.
+I use Netdata to collect metrics and monitor my server. [The `netdata` directory in this repo](https://github.com/cdzombak/ytdlbot/tree/main/netdata) contains definitions for several charts tracking metrics about your ytdlbot media library. It also has an alarm you can install to be notified when a download failure occurs.
 
 These charts assume you have the following volume mapped on the processor container:
 
@@ -241,4 +241,4 @@ If the service is up and running, `GET /health` returns HTTP 200 and the value `
 
 ## License
 
-GNU GPLv3; see LICENSE in this repo. (TODO(cdzombak): link)
+GNU GPLv3; see [LICENSE](https://github.com/cdzombak/ytdlbot/blob/main/LICENSE) in this repo.
