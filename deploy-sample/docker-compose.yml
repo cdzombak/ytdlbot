@@ -1,0 +1,36 @@
+---
+version: "3"
+
+services:
+  ytdlbot-api:
+    container_name: "ytdlbot-api"
+    hostname: "ytdlbot-api"
+    image: "cdzombak/ytdlbot-api:1"
+    restart: "unless-stopped"
+    ports:
+      - 127.0.0.1:9124:5000
+    user: "1000:1000"
+    volumes:
+      - "/mnt/storage/media/ytdlbot:/ytdlbot-media"
+
+  ytdlbot-processor:
+    container_name: "ytdlbot-processor"
+    hostname: "ytdlbot-processor"
+    image: "cdzombak/ytdlbot-processor:1"
+    restart: "unless-stopped"
+    environment:
+      - "PUID=1000"
+      - "PGID=1000"
+      - "NETDATA_GID=995"
+      - "TZ=America/Detroit"
+      - "SHARD_BY_UPLOADER=false"
+      - "RUNNER_MAILTO=me@example.com"
+      - "RUNNER_MAIL_FROM=me+ytdlbot@example.com"
+      - "RUNNER_SMTP_USER=me+ytdlbot@example.com"
+      - "RUNNER_SMTP_HOST=smtp.mailgun.org"
+      - "RUNNER_SMTP_PORT=587"
+      - "RUNNER_SMTP_PASS=${RUNNER_SMTP_PASS}"
+    volumes:
+      - "/mnt/storage/media/ytdlbot:/ytdlbot-media"
+      - "/var/run/ytdlbot:/ytdlbot-run"
+      - "/var/log/ytdlbot:/ytdlbot-logs"
