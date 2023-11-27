@@ -144,7 +144,7 @@ ytdlbot intentionally implements the _server_ side of a video collection, allowi
 
 #### Apple Shortcuts
 
-[This Shortcut](https://www.icloud.com/shortcuts/dc1e40561bca4566b881628ea6241443) receives a URL from the system share sheet, asks you which collection to add it to, and saves it. Here's a preview of the Shortcut:
+[This Shortcut](https://www.icloud.com/shortcuts/e721be6647cc480d83c94df894c615a2) receives a URL from the system share sheet, asks you which collection to add it to, and saves it. Here's a preview of the Shortcut:
 
 ![Screenshot of 'Add to ytdlbot' shortcut](readme/shortcut-preview.png)
 
