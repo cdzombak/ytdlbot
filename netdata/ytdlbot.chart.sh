@@ -32,7 +32,6 @@ ytdlbot_failures_count=0
 ytdlbot_queue_count=0
 ytdlbot_bytes_used=0
 ytdlbot_videos_count=0
-ytdlbot_backup_bytes_used=0
 
 ytdlbot_get() {
   # do all the work to collect / calculate the values
@@ -48,7 +47,6 @@ ytdlbot_get() {
   ytdlbot_failures_count=$(jq '.failures' </var/run/ytdlbot/stats.json)
   ytdlbot_bytes_used=$(jq '.bytes_used' </var/run/ytdlbot/stats.json)
   ytdlbot_videos_count=$(jq '.videos_count' </var/run/ytdlbot/stats.json)
-  ytdlbot_backup_bytes_used=$(jq '.backup_bytes_used' </var/run/ytdlbot/stats.json)
   return $?
 
   # this should return:
@@ -79,8 +77,6 @@ CHART ytdlbot.videos '' "Archived Videos" "videos" "ytdlbot" ytdlbot.videos_coun
 DIMENSION videos_count videos absolute 1 1
 CHART ytdlbot.bytes '' "Bytes On Disk" "bytes" "ytdlbot" ytdlbot.bytes_used area $((ytdlbot_priority + 3)) $ytdlbot_update_every '' '' 'ytdlbot'
 DIMENSION bytes_used bytes absolute 1024 1
-CHART ytdlbot.backup_bytes '' "Bytes In Backup Set" "bytes" "ytdlbot" ytdlbot.backup_bytes area $((ytdlbot_priority + 4)) $ytdlbot_update_every '' '' 'ytdlbot'
-DIMENSION backup_bytes bytes absolute 1024 1
 EOF
 
   return 0
@@ -103,9 +99,6 @@ SET failure_count = $ytdlbot_failures_count
 END
 BEGIN ytdlbot.bytes $1
 SET bytes_used = $ytdlbot_bytes_used
-END
-BEGIN ytdlbot.backup_bytes $1
-SET backup_bytes = $ytdlbot_backup_bytes_used
 END
 BEGIN ytdlbot.videos $1
 SET videos_count = $ytdlbot_videos_count
