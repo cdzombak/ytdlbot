@@ -5,7 +5,7 @@ FROM golang:1 AS golang-builder
 WORKDIR /src
 RUN git clone https://github.com/cdzombak/runner.git
 WORKDIR /src/runner
-RUN git fetch --tags && git checkout v2 && make build && ./out/runner -version
+RUN git fetch --tags && git checkout v2.8.4 && make build && ./out/runner -version
 
 WORKDIR /src
 RUN git clone https://github.com/cdzombak/dirshard.git
