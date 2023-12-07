@@ -41,8 +41,8 @@ COPY processor.sh /processor.sh
 RUN chmod 0555 /processor.sh
 COPY stats.sh /stats.sh
 RUN chmod 0555 /stats.sh
-COPY logfiles-cleanup.sh /logfiles-cleanup.sh
-RUN chmod 0555 /logfiles-cleanup.sh
+COPY logfiles-maintenance.sh /logfiles-maintenance.sh
+RUN chmod 0555 /logfiles-maintenance.sh
 
 RUN mkdir -p /ytdlbot-logs
 ENV RUNNER_LOG_DIR="/ytdlbot-logs"

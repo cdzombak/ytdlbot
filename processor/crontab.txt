@@ -14,5 +14,4 @@ PATH=/opt/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 *  *  *  *  *     root  ionice -c2 -n5 nice -n 10  flock -n -E 0 /tmp/processor.lock  runner -job-name "ytdlbot queue processor" -user abc -retries 1  --  /processor.sh    >/proc/1/fd/1 2>/proc/1/fd/2
 
 # Log mgmt:
-*/30	*	*	*	*	root	runner -job-name "cleanup log files"  --  /logfiles-cleanup.sh                 >/proc/1/fd/1 2>/proc/1/fd/2
-*/30	*	*	*	*	root	runner -job-name "chown log files"    --  chown abc:abc /ytdlbot-logs/*.log    >/proc/1/fd/1 2>/proc/1/fd/2
+*/30	*	*	*	*	root	flock -n -E 0 /tmp/log-maintenance.lock  runner -job-name "cleanup & chown log files"  --  /logfiles-maintenance.sh    >/proc/1/fd/1 2>/proc/1/fd/2
