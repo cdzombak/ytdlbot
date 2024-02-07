@@ -35,7 +35,7 @@ touch /ytdlbot-media/_queue.txt
 touch /ytdlbot-media/_failures.txt
 [ -e /ytdlbot-media/_disambiguations.json ] || echo "{}" >/ytdlbot-media/_disambiguations.json
 
-chown abc:abc /processor.sh /stats.sh /logfiles-cleanup.sh /healthcheck.sh
+chown abc:abc /processor.sh /stats.sh /logfiles-maintenance.sh /healthcheck.sh
 chown abc:abc /ytdlbot-logs
 chown abc:abc /ytdlbot-media/_queue.txt /ytdlbot-media/_failures.txt /ytdlbot-media/_disambiguations.json
 
