@@ -84,6 +84,9 @@ jobs:
           # See https://megalinter.io/configuration and .mega-linter.yml
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPORT_OUTPUT_FOLDER: none
+          APPLY_FIXES: all
+          APPLY_FIXES_EVENT: all
+          APPLY_FIXES_MODE: pull_request
 
   docker-ytdlbot-api:
     name: API Docker Image
