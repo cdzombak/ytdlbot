@@ -85,7 +85,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Archive MegaLinter artifacts
         if: ( !env.ACT && ( success() || failure() ) )
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MegaLinter artifacts
           path: |
@@ -160,7 +160,7 @@ jobs:
 
       - name: Update Docker Hub description
         if: needs.meta.outputs.is_release == 'true'
-        uses: peter-evans/dockerhub-description@v3
+        uses: peter-evans/dockerhub-description@432a30c9e07499fd01da9f8a49f0faf9e0ca5b77
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -236,7 +236,7 @@ jobs:
 
       - name: Update Docker Hub description
         if: needs.meta.outputs.is_release == 'true'
-        uses: peter-evans/dockerhub-description@v3
+        uses: peter-evans/dockerhub-description@432a30c9e07499fd01da9f8a49f0faf9e0ca5b77
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -255,7 +255,7 @@ jobs:
       contents: write
     steps:
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631
         with:
           prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
           fail_on_unmatched_files: true
@@ -272,7 +272,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Update running major/minor version tags
-        uses: sersoft-gmbh/running-release-tags-action@v3
+        uses: sersoft-gmbh/running-release-tags-action@890dc5c1d9edd0d0fef2fd67c6de2df641e720a6
         with:
           fail-on-non-semver-tag: true
           create-release: false
@@ -285,7 +285,7 @@ jobs:
     needs: [meta, lint, docker-ytdlbot-api, docker-ytdlbot-processor, release, tags]
     steps:
       - name: Send success notification
-        uses: niniyas/ntfy-action@master
+        uses: niniyas/ntfy-action@9c6dc60073292f562769f83df2ace9f64ab31c78
         if: ${{ !contains(needs.*.result, 'failure') }}
         with:
           url: "https://ntfy.cdzombak.net"
@@ -296,7 +296,7 @@ jobs:
           title: ${{ github.event.repository.name }} ${{ needs.meta.outputs.project_version }} available
           details: ${{ github.event.repository.name }} version ${{ needs.meta.outputs.project_version }} is now available.
       - name: Send failure notification
-        uses: niniyas/ntfy-action@master
+        uses: niniyas/ntfy-action@9c6dc60073292f562769f83df2ace9f64ab31c78
         if: ${{ contains(needs.*.result, 'failure') }}
         with:
           url: "https://ntfy.cdzombak.net"
