@@ -18,7 +18,7 @@ VIDEO_ID=""
 if [[ "$URL" =~ vimeo\.com/([0-9]+) ]]; then
   # Vimeo:
   VIDEO_ID=${BASH_REMATCH[1]}
-elif [[ "$URL" =~ [\?\&]v=([a-zA-Z0-9]+) ]]; then
+elif [[ "$URL" =~ [\?\&]v=([_a-zA-Z0-9]+) ]]; then
   # YouTube:
   VIDEO_ID=${BASH_REMATCH[1]}
 fi
