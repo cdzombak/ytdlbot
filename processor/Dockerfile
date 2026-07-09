@@ -12,7 +12,7 @@ RUN git clone https://github.com/cdzombak/dirshard.git
 WORKDIR /src/dirshard
 RUN git fetch --tags && git checkout v1 && make build && ./out/dirshard -version
 
-FROM ubuntu:jammy
+FROM ubuntu:resolute
 ARG PROJECT_VERSION
 
 RUN apt-get update \
