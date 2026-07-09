@@ -3,8 +3,8 @@
 PATH=/opt/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
 # Periodic yt-dlp update:
-@reboot           root      flock /tmp/processor.lock  runner -job-name "yt-dlp update"  --  /usr/local/bin/yt-dlp -U    >/proc/1/fd/1 2>/proc/1/fd/2
-0  */6  *  *  *   root      flock /tmp/processor.lock  runner -job-name "yt-dlp update"  --  /usr/local/bin/yt-dlp -U    >/proc/1/fd/1 2>/proc/1/fd/2
+@reboot           root      flock /tmp/processor.lock  runner -job-name "yt-dlp update"  --  /opt/yt-dlp-venv/bin/pip install -U "yt-dlp[default,curl-cffi]"    >/proc/1/fd/1 2>/proc/1/fd/2
+0  */6  *  *  *   root      flock /tmp/processor.lock  runner -job-name "yt-dlp update"  --  /opt/yt-dlp-venv/bin/pip install -U "yt-dlp[default,curl-cffi]"    >/proc/1/fd/1 2>/proc/1/fd/2
 
 # Stats collector:
 @reboot           root  ionice -c2 -n7 nice -n 19  flock -n -E 0 /tmp/stats.lock  runner -job-name "ytdlbot stats collector" -retries 2  --  /stats.sh    >/proc/1/fd/1 2>/proc/1/fd/2

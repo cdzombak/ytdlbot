@@ -17,7 +17,7 @@ ARG PROJECT_VERSION
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install -yq \
-       ca-certificates cron curl ffmpeg jq libcap2-bin python3 tzdata \
+       ca-certificates cron curl ffmpeg jq libcap2-bin python3 python3-venv tzdata \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /etc/cron.*/*
 
@@ -30,8 +30,10 @@ COPY --from=golang-builder /src/dirshard/out/dirshard /opt/bin/dirshard
 RUN chown root:root /opt/bin/dirshard && chmod 0755 /opt/bin/dirshard \
     && /opt/bin/dirshard -version
 
-RUN curl --silent -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp \
-    && chmod 0755 /usr/local/bin/yt-dlp
+RUN python3 -m venv /opt/yt-dlp-venv \
+    && /opt/yt-dlp-venv/bin/pip install -U "yt-dlp[default,curl-cffi]" \
+    && ln -s /opt/yt-dlp-venv/bin/yt-dlp /usr/local/bin/yt-dlp \
+    && yt-dlp --version
 
 RUN groupadd -g 911 abc \
     && useradd -d / --no-log-init -u 911 -g 911 abc
