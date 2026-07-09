@@ -33,7 +33,6 @@ if [[ -n "$VIDEO_ID" ]]; then
 fi
 
 RESULT_FILE=$(
-<<<<<<< HEAD
   /opt/yt-dlp-venv/bin/yt-dlp \
     --quiet --abort-on-error --no-mtime --restrict-filenames --no-playlist --print after_move:filepath \
     -o "%(uploader)s - %(title)s %(upload_date)s (%(id)s).%(ext)s" \
